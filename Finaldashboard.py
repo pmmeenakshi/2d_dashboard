@@ -841,6 +841,16 @@ with tab_map:
 
             
             community_id_val = valid.iloc[i]["community_id"] if "community_id" in valid.columns else ""
+            chart_block = ""
+
+            if show_popup_charts:
+                chart_block = f"""
+                <hr style='margin:12px 0 10px 0; width:98%; border:0.8px solid #ddd;'>
+                <div style='width:99%; margin:-6px auto 0 auto; text-align:left;'>
+                    <div style='font-size:16px; margin-bottom:5px; color:#36204D; font-weight:700;'>KGs</div>
+                    {bar_img}
+                </div>
+                """
 
             # build popup HTML
             popup_html = f"""
@@ -948,14 +958,8 @@ with tab_map:
             <hr style='margin:6px 0 6px 0; width:98%; border:0.8px solid #ddd;'>
 
             <!-- BOTTOM: Tonnage Line Chart -->
-            {""
-            if not show_popup_charts else f"""
-            <hr style='margin:12px 0 10px 0; width:98%; border:0.8px solid #ddd;'>
-            <div style='width:99%; margin:-6px auto 0 auto; text-align:left;'>
-                <div style='font-size:16px; margin-bottom:5px; color:#36204D; font-weight:700;'>KGs</div>
-                {bar_img}
-            </div>
-            """}
+            {chart_block}
+
             </div>
             """
             
@@ -972,7 +976,7 @@ with tab_map:
                 radius=8,
                 color="#333333",
                 fill=True,
-                fill_color="#333333",
+                fill_color=color,
                 fill_opacity=0.85,
                 tooltip=folium.Tooltip(f"{comm} • {pin}"),
                 popup=folium.Popup(popup_html, max_width=380),
@@ -1266,5 +1270,6 @@ with tab_insights:
         key="dl_trends_bottom",
     )
     st.dataframe(dfl_filt, use_container_width=True, height=420)
+
 
 
