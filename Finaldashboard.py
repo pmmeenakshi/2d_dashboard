@@ -957,7 +957,7 @@ with tab_map:
            
             <hr style='margin:6px 0 6px 0; width:98%; border:0.8px solid #ddd;'>
 
-            <!-- BOTTOM: Tonnage Line Chart -->
+            
             {chart_block}
 
             </div>
@@ -1270,6 +1270,7 @@ with tab_insights:
         key="dl_trends_bottom",
     )
     st.dataframe(dfl_filt, use_container_width=True, height=420)
+
 
 
 
